@@ -16,3 +16,9 @@ project history
 ```
  W14 | TBD | TBD | (pconrad) Poker Game
 ```
+
+
+To start the game, use the command
+```Java
+ant run
+```
