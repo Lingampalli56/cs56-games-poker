@@ -1,3 +1,5 @@
+package edu.ucsb.cs56.projects.games.poker;
+
 import java.util.*;
 import java.math.*;
 
@@ -71,28 +73,11 @@ public class Deck {
 		Hand hand=new Hand();
 		for(int i=0;i<2;i++)
 		{
-			int randomNum=(int)(Math.random()*(cardsLeft));
-			Card drawnCard=this.getActiveDeck().get(randomNum);
-			activeDeck.remove(drawnCard);
+			Card drawnCard = returnCard();
 			hand.add(drawnCard);
-			cardsLeft--;
 		}
 		return hand;
 	}
-	
-	/*public Hand dealCards(){
-		Hand hand=new Hand();
-		for(int i=0;i<5;i++)
-		{
-			int randomNum=(int)(Math.random()*(cardsLeft));
-			Card drawnCard=this.getActiveDeck().get(randomNum);
-			activeDeck.remove(drawnCard);
-			hand.add(drawnCard);
-			cardsLeft--;
-		}
-		return hand;
-	}*/
-	
 
 /**
 	Returns a Hand of 3 cards, representing the flop.
@@ -101,11 +86,8 @@ public class Deck {
 		Hand flop=new Hand();
 		for(int i=0;i<3;i++)
 		{
-			int randomNum=(int)(Math.random()*(cardsLeft));
-			Card drawnCard=this.getActiveDeck().get(randomNum);
-			activeDeck.remove(drawnCard);
+            Card drawnCard = returnCard();
 			flop.add(drawnCard);
-			cardsLeft--;
 		}
 		return flop;
 	}
@@ -115,7 +97,7 @@ public class Deck {
 	public Card returnCard(){
 		int randomNum=(int)(Math.random()*(cardsLeft));
 		cardsLeft--;
-		Card drawnCard=this.getActiveDeck().get(randomNum);
+		Card drawnCard = activeDeck.get(randomNum);
 		activeDeck.remove(drawnCard);
 		return drawnCard;
 	}
@@ -127,7 +109,17 @@ public class Deck {
 		for(Card c:discardPile)
 			activeDeck.add(c);
 	}
-	
+
+
+    /**
+     * Add card to discard pile
+     */
+    public void burnCard()
+    {
+        Card burnCard = returnCard();
+        discardPile.add(burnCard);
+        activeDeck.remove(burnCard);
+    }
 	
 	
 }
